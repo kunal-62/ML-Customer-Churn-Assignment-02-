@@ -2,6 +2,8 @@ import joblib
 import os
 import pandas as pd
 import streamlit as st
+import seaborn as sns
+import matplotlib.pyplot as plt
 from sklearn.metrics import (
     accuracy_score,
     classification_report,
@@ -23,14 +25,14 @@ selection = st.sidebar.selectbox('Select the classification model you would like
 st.subheader(selection)
 
 #3. Load trained model and scaler
-@st.cache_resource
+#@st.cache_resource
 def load_artifacts():
-    scaler = joblib.load("scaler.joblib")
+    scaler = joblib.load("models/scaler.joblib")
 
     models = {"Logistic Regression" :"log_reg_model.joblib",
               "Decision Tree": "dt_model.joblib",
               "kNN": "kNN_model.joblib",
-              "Naives Bayes": "nb_model.joblib",
+              "Naives Bayes": "nb_model_tuned.joblib",
               "Random Forest": "rf_model.joblib",
             }
 
@@ -67,23 +69,52 @@ if uploaded_file is not None:
         y_pred = model.predict(X_test_scaled)
         y_prob = model.predict_proba(X_test_scaled)[:, 1]
 
+        # # Calculate metrics
+        # acc = accuracy_score(y_test, y_pred)
+        # prec = precision_score(y_test, y_pred)
+        # rec = recall_score(y_test, y_pred)
+        # roc_auc = roc_auc_score(y_test, y_prob)
+
+        # # 4. Display metrics in columns
+        # st.subheader("Model Performance Metrics")
+        # col1, col2, col3, col4 = st.columns(4)
+        # col1.metric("Accuracy", f"{acc:.4f}")
+        # col2.metric("Precision", f"{prec:.4f}")
+        # col3.metric("Recall", f"{rec:.4f}")
+        # col4.metric("ROC AUC", f"{roc_auc:.4f}")
+
+        # # 5. Additional evaluation details
+        # st.subheader("Confusion Matrix")
+        # st.dataframe(pd.DataFrame(confusion_matrix(y_test, y_pred)))
+
+        # st.subheader("Classification Report")
+        # st.text(classification_report(y_test, y_pred))
+
         # Calculate metrics
         acc = accuracy_score(y_test, y_pred)
         prec = precision_score(y_test, y_pred)
         rec = recall_score(y_test, y_pred)
         roc_auc = roc_auc_score(y_test, y_prob)
 
-        # 4. Display metrics in columns
-        st.subheader("Model Performance Metrics")
+        # Display metrics in columns with color emphasis
+        st.subheader("📊 Model Performance Metrics")
         col1, col2, col3, col4 = st.columns(4)
         col1.metric("Accuracy", f"{acc:.4f}")
         col2.metric("Precision", f"{prec:.4f}")
         col3.metric("Recall", f"{rec:.4f}")
         col4.metric("ROC AUC", f"{roc_auc:.4f}")
 
-        # 5. Additional evaluation details
-        st.subheader("Confusion Matrix")
-        st.dataframe(pd.DataFrame(confusion_matrix(y_test, y_pred)))
+        # Confusion Matrix with heatmap
+        st.subheader("🔎 Confusion Matrix")
+        cm = confusion_matrix(y_test, y_pred)
+        fig, ax = plt.subplots()
+        sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", cbar=False, ax=ax)
+        ax.set_xlabel("Predicted")
+        ax.set_ylabel("Actual")
+        st.pyplot(fig)
 
-        st.subheader("Classification Report")
-        st.text(classification_report(y_test, y_pred))
+        # Classification Report in a nice dataframe
+        st.subheader("📑 Classification Report")
+        report = classification_report(y_test, y_pred, output_dict=True)
+        report_df = pd.DataFrame(report).transpose()
+        st.dataframe(report_df.style.background_gradient(cmap="YlGnBu"))
