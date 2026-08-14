@@ -11,6 +11,8 @@ from sklearn.metrics import (
     precision_score,
     recall_score,
     roc_auc_score,
+    f1_score, 
+    matthews_corrcoef
 )
 
 
@@ -94,15 +96,19 @@ if uploaded_file is not None:
         acc = accuracy_score(y_test, y_pred)
         prec = precision_score(y_test, y_pred)
         rec = recall_score(y_test, y_pred)
+        f1 = f1_score(y_test, y_pred)
+        mcc = matthews_corrcoef(y_test, y_pred)
         roc_auc = roc_auc_score(y_test, y_prob)
 
-        # Display metrics in columns with color emphasis
+        # Display metrics in columns
         st.subheader("📊 Model Performance Metrics")
-        col1, col2, col3, col4 = st.columns(4)
+        col1, col2, col3, col4, col5, col6 = st.columns(6)
         col1.metric("Accuracy", f"{acc:.4f}")
         col2.metric("Precision", f"{prec:.4f}")
         col3.metric("Recall", f"{rec:.4f}")
-        col4.metric("ROC AUC", f"{roc_auc:.4f}")
+        col4.metric("F1 Score", f"{f1:.4f}")
+        col5.metric("MCC", f"{mcc:.4f}")
+        col6.metric("ROC AUC", f"{roc_auc:.4f}")
 
         # Confusion Matrix with heatmap
         st.subheader("🔎 Confusion Matrix")
@@ -113,7 +119,7 @@ if uploaded_file is not None:
         ax.set_ylabel("Actual")
         st.pyplot(fig)
 
-        # Classification Report in a nice dataframe
+        # Classification Report in a styled dataframe
         st.subheader("📑 Classification Report")
         report = classification_report(y_test, y_pred, output_dict=True)
         report_df = pd.DataFrame(report).transpose()
