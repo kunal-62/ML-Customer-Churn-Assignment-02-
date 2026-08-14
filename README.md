@@ -197,32 +197,27 @@ CV F1 = 0.6338
 
 ## 6. Baseline Results
 
-  Model                   Accuracy   Precision   Recall   ROC-AUC
-  --------------------- ---------- ----------- -------- ---------
-  Logistic Regression       0.8038      0.6476   0.5749    0.8357
-  Decision Tree             0.7015      0.4401   0.4519    0.6218
-  kNN                       0.7548      0.5387   0.5401    0.7682
-  Naive Bayes               0.7356      0.5018   0.7513    0.8219
-  Random Forest             0.7889      0.6262   0.5107    0.8209
+| Model | Accuracy | Precision | Recall | ROC-AUC |
+|---|---:|---:|---:|---:|
+| Logistic Regression | **0.8038** | **0.6476** | 0.5749 | **0.8357** |
+| Decision Tree | 0.7015 | 0.4401 | 0.4519 | 0.6218 |
+| kNN | 0.7548 | 0.5387 | 0.5401 | 0.7682 |
+| Naive Bayes | 0.7356 | 0.5018 | **0.7513** | 0.8219 |
+| Random Forest | 0.7889 | 0.6262 | 0.5107 | 0.8209 |
 
 ------------------------------------------------------------------------
 
 ## 7. Tuned Model Results
 
-  --------------------------------------------------------------------------------------------
-  ML Model           Accuracy          AUC    Precision       Recall           F1          MCC
-  -------------- ------------ ------------ ------------ ------------ ------------ ------------
-  **Logistic           0.7264   **0.8349**       0.4909       0.7968   **0.6075**   **0.4439**
-  Regression**                                                                    
+ ## 7. Tuned Model Results
 
-  Decision Tree        0.5800       0.7859       0.3835   **0.9545**       0.5471       0.3724
-
-  **kNN**          **0.7747**       0.8133   **0.5777**       0.5668       0.5722       0.4193
-
-  Naive Bayes          0.7356       0.8219       0.5018       0.7513       0.6017       0.4343
-
-  Random Forest        0.5800       0.8121       0.3814   **0.9332**       0.5415       0.3569
-  --------------------------------------------------------------------------------------------
+| ML Model | Accuracy | AUC | Precision | Recall | F1 | MCC |
+|---|---:|---:|---:|---:|---:|---:|
+| **Logistic Regression** | 0.7264 | **0.8349** | 0.4909 | 0.7968 | **0.6075** | **0.4439** |
+| Decision Tree | 0.5800 | 0.7859 | 0.3835 | **0.9545** | 0.5471 | 0.3724 |
+| **kNN** | **0.7747** | 0.8133 | **0.5777** | 0.5668 | 0.5722 | 0.4193 |
+| Naive Bayes | 0.7356 | 0.8219 | 0.5018 | 0.7513 | 0.6017 | 0.4343 |
+| Random Forest | 0.5800 | 0.8121 | 0.3814 | **0.9332** | 0.5415 | 0.3569 |
 
 ------------------------------------------------------------------------
 
@@ -407,15 +402,15 @@ Regression.
 
 # 10. Metric-Wise Best Models
 
-  Metric       Best Model                       Score
-  ------------ ------------------------- ------------
-  Accuracy     **kNN**                     **0.7747**
-  ROC-AUC      **Logistic Regression**     **0.8349**
-  Precision    **kNN**                     **0.5777**
-  Recall       **Decision Tree**           **0.9545**
-  F1           **Logistic Regression**     **0.6075**
-  MCC          **Logistic Regression**     **0.4439**
-  Best CV F1   **Random Forest**           **0.6338**
+| Metric | Best Model | Score |
+|---|---|---:|
+| Accuracy | **kNN** | **0.7747** |
+| ROC-AUC | **Logistic Regression** | **0.8349** |
+| Precision | **kNN** | **0.5777** |
+| Recall | **Decision Tree** | **0.9545** |
+| F1 | **Logistic Regression** | **0.6075** |
+| MCC | **Logistic Regression** | **0.4439** |
+| Best CV F1 | **Random Forest** | **0.6338** |
 
 No single model is best on every metric.
 
@@ -542,8 +537,8 @@ Telco_Customer_Churn_ML_Asgn02/
 ├── app.py
 ├── README.md
 ├── requirements.txt
-└── test_data.csv
-
+└── test_data.csv 
+```
 ------------------------------------------------------------------------
 
 # 15. Technologies Used
