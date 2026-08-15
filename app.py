@@ -17,9 +17,15 @@ from sklearn.metrics import (
 
 
 #1. SET UP THE PAGE
-st.set_page_config(page_title="Customer Churn Prediction App", layout="centered")
+# st.set_page_config(page_title="Customer Churn Prediction App", layout="centered")
+st.set_page_config(
+    page_title="Telco Customer Churn Model Evaluator",
+    page_icon="📊",
+    layout="wide"
+)
 
-st.title("Classification Model Evaluator")
+st.title("📊 Telco Customer Churn Classification")
+st.subheader("Machine Learning Model Evaluation Platform")
 
 #2. SET UP MODEL SELECTION OPTIONS
 model_options = ["Logistic Regression", "Decision Tree", "kNN", "Naives Bayes", "Random Forest"]
@@ -57,7 +63,16 @@ if uploaded_file is not None:
     st.write("### Dataset Preview", df_test.head())
 
     # 3. Select target column
-    target_col = st.selectbox("Select the Target (True Label) Column", df_test.columns)
+    #target_col = st.selectbox("Select the Target (True Label) Column", df_test.columns)
+    if "Churn" in df_test.columns:
+        target_col = "Churn"
+    elif "churn" in df_test.columns:
+        target_col = "churn"
+    else:
+        st.error("❌ The uploaded dataset must contain a 'Churn' or 'churn' column.")
+        st.stop()
+
+    target_col = st.selectbox("Select the Target (True Label) Column",["Churn"])
 
     if st.button("Evaluate Model"):
         # Separate features and target
