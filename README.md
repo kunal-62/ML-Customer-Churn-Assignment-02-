@@ -78,9 +78,9 @@ Train / Test Split
      +-----------------------------+
      |                             |
      v                             v
-Feature Scaling               Tree-Based Models
+Feature Scaling               Classification Models
      |                             |
-     |                    Decision Tree / Random Forest
+     |                    Decision Tree / Random Forest / Naive Bayes / Logistic Regression / kNN
      |                             |
      +-------------+---------------+
                    |
@@ -206,8 +206,6 @@ CV F1 = 0.6338
 | Random Forest | 0.7889 | 0.6262 | 0.5107 | 0.8209 |
 
 ------------------------------------------------------------------------
-
-## 7. Tuned Model Results
 
  ## 7. Tuned Model Results
 
@@ -439,10 +437,6 @@ only:
 ``` text
 0.6338 - 0.6325 = 0.0013
 ```
-
-Therefore, Random Forest's very small CV advantage does not outweigh its
-substantially weaker test-set Precision, Accuracy, F1, and MCC.
-
 ### Business Perspective
 
 If the business's primary objective is to **identify almost every
@@ -523,7 +517,7 @@ Telco_Customer_Churn_ML_Asgn02/
 │   ├── kNN.ipynb
 │   ├── log_reg_model.joblib
 │   ├── LogisticRegression.ipynb
-│   ├── ml_model_creation.ipynb
+│   ├── data_preprocessing_and_eda.ipynb
 │   ├── NaiveBayes.ipynb
 │   ├── nb_model_tuned.joblib
 │   ├── RandomForest.ipynb
@@ -549,6 +543,8 @@ Telco_Customer_Churn_ML_Asgn02/
 -   Scikit-learn
 -   Joblib
 -   Jupyter Notebook
+-   Streamlit
+-   pyplot
 
 ### Machine Learning Techniques
 
@@ -563,26 +559,7 @@ Telco_Customer_Churn_ML_Asgn02/
 
 ------------------------------------------------------------------------
 
-# 16. Future Improvements
-
-Potential improvements include:
-
--   Optimize classification probability thresholds according to the
-    business cost of false positives and false negatives.
--   Compare Precision-Recall curves.
--   Perform additional feature engineering.
--   Analyze Logistic Regression coefficients.
--   Analyze Decision Tree and Random Forest feature importance.
--   Use SHAP or another explainability technique.
--   Build a Scikit-learn Pipeline combining preprocessing and the
-    selected model.
--   Deploy the selected model through an API or web application.
--   Introduce cost-sensitive evaluation based on actual customer
-    retention costs.
-
-------------------------------------------------------------------------
-
-# 17. Conclusion
+# 16. Conclusion
 
 This project demonstrates a complete machine learning workflow for Telco
 Customer Churn prediction, including preprocessing, baseline modeling,
